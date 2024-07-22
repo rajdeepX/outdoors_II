@@ -1,28 +1,13 @@
-$color-primary: #55c57a;
-$color-primary-light: #7ed56f;
-$color-primary-dark: #28b485;
-
-$color-secondary-light: #ffb900;
-$color-secondary-dark: #ff7730;
-
-$color-tertiary-light: #2998ff;
-$color-tertiary-dark: #5643fa;
-
-$color-grey-dark: #777;
-$color-grey-light-1: #f7f7f7;
-$color-grey-light-2: #eee;
-$color-white: #fff;
-$color-black: #000;
-
-$grid-width: 114rem;
-$gutter-vertical: 8rem;
-$gutter-horizontal: 6rem;
-
-$default-font-size: 1.6rem;
+@import "../css/Variables.scss";
+@import "../css/Mixins.scss";
 
 .section-stories {
   padding: 15rem 0;
   position: relative;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
 }
 
 .story {
@@ -36,6 +21,16 @@ $default-font-size: 1.6rem;
   font-size: $default-font-size;
   transform: skewX(-12deg);
 
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
   &__shape {
     width: 15rem;
     height: 15rem;
@@ -44,6 +39,10 @@ $default-font-size: 1.6rem;
     clip-path: circle(50% at 50% 50%);
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
   }
 
   &__img {
@@ -54,6 +53,10 @@ $default-font-size: 1.6rem;
 
   &__text {
     transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
   }
 
   &__caption {

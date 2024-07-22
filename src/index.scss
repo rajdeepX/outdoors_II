@@ -1,13 +1,7 @@
-/* 
-COLORS
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+@import "./components/css/Mixins.scss";
+@import "./components/css/Variables.scss";
 
 *,
 *::after,
@@ -17,16 +11,8 @@ Dark green: #28b485
   box-sizing: border-box;
 }
 
-$color-primary: #55c57a;
-$color-primary-light: #7ed56f;
-$color-primary-dark: #28b485;
-
-$color-grey-dark: #777;
-$color-black: #000;
-$color-white: #fff;
-
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 10px;  10px/16px = 62.5%
   /* as the default font size of the browser is 16, we can override it for our ease of doing the lengthy calculation of converting it to rem values.
   for that we can do
   font-size: 10px; to reduce the default to 10px. Makes it easy for us to convert them into rem values by diving the px values by 10.
@@ -36,6 +22,82 @@ html {
   To do this we just divide 10/16 x 100 = 62.5% i.e. what % is 10px relative to 16px of default.
   In this way we get to use the 10px in our html in % and can also easily convert px values in rem in our project.
   */
+
+  /*
+  Now since we have tweeked the font-size to be 1rem = 10px, now we will do that again in the media queries.
+  
+  
+/////////
+
+So we now give the names to the breakpoint arguments that we are going to use
+
+$breakpoint argument choices-
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+
+/////////
+
+Now as the default font size will not be used inside our media queries, we have to set them up again in order to adapt to our needs
+
+We know that 1rem = 16px by default
+So in order to maintain the size, we will convert them again for all of our media queries
+
+So for the breakpoints: 
+- phone: 
+- tab-port: we want 1rem = 8px => so, 8/16= 50%
+- tab-land: we want 1rem = 9px => so, 9/16= 56.25%
+- big-desktop: 
+
+We are choosing our font size to be different for different screens because for smaller screens we will have to scale down, and to do so we need to dail down the default font size in order to be responsive
+
+Why we are doing this?
+Becoz we have set up our entire css to use rem in order to act according to our default font size throughout the entire application (padding, line height, margin, etc)
+So, if we do not change this, it will take up the default font-size and will not act according to our media queries and will have design flaws (in terms of increased or decreased sizes of those properties that used rem earlier)
+
+
+************************
+Also, the order of CSS matters.
+Check here: https://stackoverflow.com/questions/8790321/why-does-the-order-of-media-queries-matter-in-css
+
+Suppose we want to add some media query for 700px screen size
+Now 700 is smaller than 900 (tab-port) and also 1200 (tab-land)
+So if we write them in this order:-
+
+  
+  @include respond(tab-port) { // width < 900
+    font-size: 50%; 
+  }
+ @include respond(tab-land) {  // width < 1200
+    font-size: 56.25%; 
+  }
+
+ // 700px
+
+  Now what will happen is since both conditions satisfies for 700, the latter written css will be applied
+  i.e. for tab-land (1200px).
+  That's why writing css for desktop first approach we need to write the larger screen size css first and then the lower screen css.
+  And opposite for mobile first approach for the same reason
+
+
+DESKTOP_FIRST:  While applying max-width, higher pixel should be added first and lower pixels should be below.
+MOBILE_FIRST:   While applying min-width, lower pixel should be added first and higher pixels should be below.
+
+************************
+  */
+
+  @include respond(tab-land) {
+    font-size: 56.25%; // 1rem = 8px => so, 9/16= 56.25% (since screen size is smaller than our desktop)
+  }
+  @include respond(tab-port) {
+    font-size: 50%; // 1rem = 8px => so, 8/16= 50%  (since screen size is smaller than our desktop)
+  }
+
+  @include respond(big-desktop) {
+    font-size: 80%; // 1rem = 12px => so, 12/16= 75% (since screen size is smaller than our desktop)
+  }
 }
 
 body {
@@ -45,6 +107,10 @@ body {
   line-height: 1.7;
   color: $color-grey-dark;
   padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
 }
 
 .u-center-text {
@@ -53,9 +119,17 @@ body {
 
 .u-margin-bottom-big {
   margin-bottom: 8rem !important;
+
+  @include respond(tab-port) {
+    margin-bottom: 5rem !important;
+  }
 }
 .u-margin-bottom-medium {
   margin-bottom: 4rem !important;
+
+  @include respond(tab-port) {
+    margin-bottom: 3rem !important;
+  }
 }
 
 .u-margin-bottom-small {
@@ -84,6 +158,13 @@ body {
   color: transparent;
   letter-spacing: 2px;
   transition: all 0.2s;
+
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+  @include respond(phone) {
+    font-size: 2.5rem;
+  }
 
   &:hover {
     transform: skewY(2deg) skewX(15deg) scale(1.1);

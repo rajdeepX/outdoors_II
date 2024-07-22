@@ -1,23 +1,22 @@
-$grid-width: 114rem;
-$gutter-vertical: 8rem;
-$gutter-horizontal: 6rem;
-
-@mixin clearfix {
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
+@import "../css/Variables.scss";
+@import "../css/Mixins.scss";
 
 .row {
   max-width: $grid-width;
-  background-color: #eee;
   margin: 0 auto;
+
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
 
   &:not(:last-child) {
     //everything except last child
     margin-bottom: $gutter-vertical;
+
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
   }
 
   @include clearfix;
@@ -28,11 +27,20 @@ $gutter-horizontal: 6rem;
     // another symbol * means any attribute that contain...
     // another symbol $ means any attribute that ends with...
     // so class^="col" means select all the class that starts with the class name col
-    background-color: orangered;
+
     float: left;
 
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
+
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    @include respond(tab-port) {
+      width: 100% !important;
     }
   }
 

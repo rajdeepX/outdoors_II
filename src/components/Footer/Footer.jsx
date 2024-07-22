@@ -55,6 +55,10 @@ const Footer = () => {
             </p>
           </div>
         </div>
+        <h4 className="footer__credit">
+          <span className="footer__credit-text">Designed by</span>
+          Jonas Schmedtmann
+        </h4>
       </footer>
     </>
   );

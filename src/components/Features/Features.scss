@@ -1,10 +1,5 @@
-$color-primary: #55c57a;
-$color-primary-light: #7ed56f;
-$color-primary-dark: #28b485;
-
-$color-grey-dark: #777;
-$color-white: #fff;
-$color-black: #000;
+@import "../css/Variables.scss";
+@import "../Grid/Grid.scss";
 
 .section-features {
   padding: 20rem 0;
@@ -25,6 +20,10 @@ $color-black: #000;
   }
 
   margin-top: -11.5rem;
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
 }
 
 .feature-box {
@@ -35,6 +34,10 @@ $color-black: #000;
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
   transition: all 0.3s;
+
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
 
   &__icon {
     font-size: 6rem;
@@ -51,6 +54,10 @@ $color-black: #000;
     color: transparent;
     background-clip: text;
     // ************
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
   }
 
   &:hover {
