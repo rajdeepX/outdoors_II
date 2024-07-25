@@ -203,7 +203,9 @@
 
   // ********************** MEDIA QUERY ****************** //
 
-  @include respond(tab-port) {
+  // instead of writing @include respond, we are using the original media query becoz we want to display the back of the card to the devices which has a larger display but has no hover such as iPad.
+
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
     height: auto;
     border-radius: 3px;
     background-color: $color-white;
