@@ -1,4 +1,5 @@
 @import "../css/Variables.scss";
+@import "../css/Mixins.scss";
 
 .popup {
   background-color: rgba($color-black, 0.3);
@@ -29,11 +30,23 @@
     transform: translate(-50%, -50%) scale(0.25);
     opacity: 0;
     transition: all 0.4s 0.2s;
+
+    @include respond(tab-port) {
+      width: 80%;
+    }
   }
 
   &__left {
     width: 33.33%;
     display: table-cell;
+
+    @include respond(tab-port) {
+      width: 40%;
+    }
+
+    @include respond(phone) {
+      display: none;
+    }
   }
 
   &__right {
@@ -64,6 +77,10 @@
     -ms-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+
+    @include respond(phone) {
+      display: none;
+    }
   }
 
   &:target {
