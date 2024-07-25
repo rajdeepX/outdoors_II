@@ -1,8 +1,11 @@
 import "./About.scss";
 
 import p1 from "../../assets/img/nat-1-large.jpg";
+import p11 from "../../assets/img/nat-1.jpg";
 import p2 from "../../assets/img/nat-2-large.jpg";
+import p22 from "../../assets/img/nat-2.jpg";
 import p3 from "../../assets/img/nat-3-large.jpg";
+import p33 from "../../assets/img/nat-3.jpg";
 
 const About = () => {
   return (
@@ -39,6 +42,27 @@ const About = () => {
           <div className="col-1-of-2">
             <div className="composition">
               <img
+                srcSet={`${p11} 300w, ${p1} 1000w`}
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="photo 1"
+                className="composition__photo composition__photo--p1"
+                src={p1}
+              />
+              <img
+                srcSet={`${p22} 300w, ${p2} 1000w`}
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="photo 2"
+                className="composition__photo composition__photo--p2"
+                src={p2}
+              />
+              <img
+                srcSet={`${p33} 300w, ${p3} 1000w`}
+                sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                alt="photo 3"
+                className="composition__photo composition__photo--p3"
+                src={p3}
+              />
+              {/* <img
                 src={p1}
                 alt="img_1"
                 className="composition__photo composition__photo--p1"
@@ -52,7 +76,7 @@ const About = () => {
                 src={p3}
                 alt="img_3"
                 className="composition__photo composition__photo--p3"
-              />
+              /> */}
             </div>
           </div>
         </div>
